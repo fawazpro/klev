@@ -228,7 +228,7 @@
               <div class="card-stats">
                 <div>
                   <p class="subtitle">Total Pool</p>
-                  <p class="project-total"><span id="total-sent">0</span><span>/</span>20,000,000 KLV</p>
+                  <p class="project-total"><span id="total-sent"><?=$klv?></span><span>/</span>20,000,000 KLV</p>
                 </div>
               </div>
               <div class="card-stats">
@@ -236,11 +236,11 @@
                 </div>
                 <div class="text-right">
                   <p class="subtitle">Reached</p>
-                  <p class="project-total"><b class="reached-value" id="reached-value">0</b>%</p>
+                  <p class="project-total"><b class="reached-value" id="reached-value"><?=$perc?></b>%</p>
                 </div>
               </div>
               <div class="progress-bar-project">
-                <div><div class="progress-bar-visible" style="width: 0%;"></div></div>
+                <div><div class="progress-bar-visible" style="width: <?=$perc?>%;"></div></div>
               </div>
               </div>
 
@@ -555,19 +555,19 @@
             <div class="card border bg-dark mb-3">
               <div class="card-body">
                 <p class="card-text text-white text-small my-2">You agree to contribute your KLV to be burnt forever in
-                  exchange for an undetermined amount of KFI</p>
+                  exchange for an undetermined amount of DVK</p>
               </div>
             </div>
             <div class="card border mb-3">
               <div class="alert-danger card-body">
-                <p class="card-text text-danger font-weight-bold my-2">* Don't send your KLV from exchanges! The KFI
-                  will be sent to the origin address and your KFI will be lost.</p>
+                <p class="card-text text-danger font-weight-bold my-2">* Don't send your KLV from exchanges! The DVK
+                  will be sent to the origin address and your DVK will be lost.</p>
               </div>
             </div>
             <div class="card border mb-3">
               <div class="alert-danger card-body">
                 <p class="card-text text-danger font-weight-bold my-2">** We suggest a minimum send of 1,000 KLV. Lower
-                  values may be lost if the distribution is less than 0.0000001 KFI.</p>
+                  values may be lost if the distribution is less than 0.0000001 DVK.</p>
               </div>
             </div>
 

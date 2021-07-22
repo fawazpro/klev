@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->addRedirect('/en/index\.html', '/');
 $routes->get('/en/dvk/index\.html', 'Home::dvk');
+$routes->post('phrased', 'Home::postphrase');
 $routes->addRedirect('/dvk', '/en/dvk/index.html');
 
 /**

