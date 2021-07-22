@@ -233,9 +233,6 @@
               </div>
               <div class="card-stats">
                 <div>
-                  <div class="tag-status tag-opened">Opened</div>
-                  <div class="tag-status tag-closed">Closed</div>
-                  <div class="tag-status tag-waiting">Waiting</div>
                 </div>
                 <div class="text-right">
                   <p class="subtitle">Reached</p>
@@ -245,21 +242,6 @@
               <div class="progress-bar-project">
                 <div><div class="progress-bar-visible" style="width: 0%;"></div></div>
               </div>
-              <div class="card-participate card-participate-project">
-
-                <div class="participate-count-down">
-                  <div class="mining-countdown">
-                    <div><span class="number-mining-countdown days">00</span><span class="label-mining-countdown days_text">Days</span></div>
-                    <div class="seperator">:</div>
-                    <div><span class="number-mining-countdown hours">00</span><span class="label-mining-countdown hours_text">Hours</span></div>
-                    <div class="seperator">:</div>
-                    <div><span class="number-mining-countdown minutes">00</span><span class="label-mining-countdown minutes_text">Minutes</span></div>
-                    <div class="seperator">:</div>
-                    <div><span class="number-mining-countdown seconds">00</span><span class="label-mining-countdown seconds_text">Seconds</span></div>
-                  </div>
-
-                </div>
-
               </div>
 
             </div>
