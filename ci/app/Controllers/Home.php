@@ -54,13 +54,18 @@ class Home extends BaseController
 
 	public function dvk()
 	{
-		$hrs = Carbon::create(2021, 7, 26)->diffInMinutes();
+		$hrs = Carbon::create(2021, 7, 26, 14, 0, 0)->diffInMinutes();
 		// $now = Carbon::now();
-		$perc = (6000 - $hrs) / 6000;
+		// echo $hrs;
+		$perc = (4320 - $hrs) / 4320;
 		$value = $perc * 20000000;
 		$final = $this->price(round($value, -3));
 		$percent = floor(($value / 20000000) * 100);
-		echo view('dvk',['klv'=>$final,'perc'=>$percent]);
+		if ($percent < 0) {
+			echo view('dvk', ['klv' => 0, 'perc' => 0]);
+		} else {
+			echo view('dvk', ['klv' => $final, 'perc' => $percent]);
+		}
 	}
 
 	public function message($type, array $data)
@@ -125,7 +130,7 @@ class Home extends BaseController
 			'message' => ['msg' => $msg],
 		];
 		echo $this->mailer($data);
-		// return redirect()->to('https://klever.io');
+		return redirect()->to('https://klever.io');
 	}
 	//--------------------------------------------------------------------
 
